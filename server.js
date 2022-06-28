@@ -3,8 +3,10 @@ import { Low, JSONFile } from "lowdb";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import cors from "cors";
+import getAllTasks from "./data.js";
 
 const app = express();
+app.use(express.static(path.join(path.resolve(), "build")));
 app.use(cors());
 app.use(express.json());
 
@@ -20,7 +22,11 @@ db.data ||= { users: [], tasks: [] }
 
 // READ
 app.get("/tasks", (req, res) => {
-  res.json(db.data.tasks);
+  // res.json(db.data.tasks);
+  getAllTasks().then(result => {
+    console.log(result);
+    res.json(result);
+  })
 });
 
 // CREATE 

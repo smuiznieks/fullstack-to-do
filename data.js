@@ -8,25 +8,37 @@ const url = "mongodb://127.0.0.1:27017";
 const client = new MongoClient(url);
 // Database Name
 const dbName = "to-do-list";
+let db;
+let collection;
 
 async function main() {
   // Use connect method to connect to the server
   await client.connect();
   console.log("Connected successfully to server");
-  const db = client.db(dbName);
-  const collection = db.collection("tasks");
+  db = client.db(dbName);
+  collection = db.collection("tasks");
 
-  const insertResult = await collection.insertMany([
-    { a: 1 },
-    { a: 2 },
-    { a: 3 },
-  ]);
-  console.log("Inserted documents =>", insertResult);
+  // const insertResult = await collection.insertMany([
+  //   { a: 1 },
+  //   { a: 2 },
+  //   { a: 3 },
+  // ]);
+  // console.log("Inserted documents =>", insertResult);
 
-  return "done.";
+  // return "done.";
 }
 
-main()
-  .then(console.log)
-  .catch(console.error)
-  .finally(() => client.close());
+main();
+  // .then(console.log)
+  // .catch(console.error)
+  // .finally(() => client.close());
+
+const getAllTasks = () => {
+  return new Promise((resolve, reject) => {
+    collection.find({}).toArray(function(err, tasks){
+      err ? reject(err) : resolve(tasks);
+    })
+  })
+}
+
+export default getAllTasks;
