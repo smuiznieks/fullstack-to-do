@@ -42,4 +42,18 @@ const getAllTasks = () => {
   })
 }
 
-export default getAllTasks;
+const createTask = ({description, userId}) => {
+  return new Promise((resolve, reject) => {
+    collection.insertOne({
+      userId,
+      description,
+      isComplete: false
+    }).then(function(res) {
+      resolve(res.insertedId.toString())
+    }).catch(function(err) {
+      reject(err)
+    })
+  })
+}
+
+export { getAllTasks, createTask };
