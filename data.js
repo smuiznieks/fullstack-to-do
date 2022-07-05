@@ -4,7 +4,8 @@ import { MongoClient } from "mongodb";
 
 // Connection URL
 // const url = "mongodb://localhost:27017";
-const url = "mongodb://127.0.0.1:27017";
+// const url = "mongodb://127.0.0.1:27017";
+const url = "mongodb+srv://selga:d063NMIdf7mbSmmZ@cluster0.mw0ub5m.mongodb.net/?retryWrites=true&w=majority"
 const client = new MongoClient(url);
 // Database Name
 const dbName = "to-do-list";
@@ -19,18 +20,18 @@ async function main() {
   collection = db.collection("tasks");
 
   // const insertResult = await collection.insertMany([
-  //   { a: 1 },
-  //   { a: 2 },
-  //   { a: 3 },
+  //   { a: 11 },
+  //   { a: 22 },
+  //   { a: 33 },
   // ]);
   // console.log("Inserted documents =>", insertResult);
 
-  // return "done.";
+  return "done.";
 }
 
-main();
-  // .then(console.log)
-  // .catch(console.error)
+main()
+  .then(console.log)
+  .catch(console.error)
   // .finally(() => client.close());
 
 const getAllTasks = () => {
