@@ -13,7 +13,6 @@ app.use(express.json());
 const port = process.env.PORT || 3001;
 console.log(port);
 
-
 // Use JSON file for storage
 // const file = path.join(path.resolve(), "db.json");
 // const adapter = new JSONFile(file);
