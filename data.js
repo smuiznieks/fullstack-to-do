@@ -11,10 +11,28 @@ const client = new MongoClient(url);
 const dbName = "to-do-list";
 let db;
 let collection;
-await client.connect();
-console.log("Connected successfully to server");
-const db = client.db(dbName);
-const  collection = db.collection("tasks");
+
+async function main() {
+  // Use connect method to connect to the server
+  await client.connect();
+  console.log("Connected successfully to server");
+  db = client.db(dbName);
+  collection = db.collection("tasks");
+
+  // const insertResult = await collection.insertMany([
+  //   { a: 11 },
+  //   { a: 22 },
+  //   { a: 33 },
+  // ]);
+  // console.log("Inserted documents =>", insertResult);
+
+  return "done.";
+}
+
+main()
+  .then(console.log)
+  .catch(console.error)
+  // .finally(() => client.close());
 
 const getAllTasks = () => {
   return new Promise((resolve, reject) => {
