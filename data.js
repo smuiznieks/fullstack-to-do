@@ -5,44 +5,49 @@ import { MongoClient } from "mongodb";
 // Connection URL
 // const url = "mongodb://localhost:27017";
 // const url = "mongodb://127.0.0.1:27017";
-const url = "mongodb+srv://selga:d063NMIdf7mbSmmZ@cluster0.mw0ub5m.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(url);
-// Database Name
+const url = "mongodb+srv://selga:03p8Fo1RUMLjslib@cluster0.mw0ub5m.mongodb.net/?retryWrites=true&w=majority";
 const dbName = "to-do-list";
-let db;
+
+const client = new MongoClient(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+let dbConnection;
 let collection;
 
-async function connect() {
-  // Use connect method to connect to the server
-  await client.connect();
-  console.log("Connected successfully to server");
-  db = client.db(dbName);
-  collection = db.collection("tasks");
-  return "done.";
-}
+const connectToServer = () => {
+  client.connect(function (err, db) {
+    if (err || !db) {
+      return callback(err);
+    }
+
+    dbConnection = db.db("to-do-list");
+    collection = dbConnection.collection("tasks");
+    console.log("Successfully connected to MongoDB.");
+  });
+};
+
+connectToServer();
 
 const getAllTasks = () => {
   return new Promise((resolve, reject) => {
-    connect().then(() => {
-      collection.find({}).toArray(function(err, tasks){
-        err ? reject(err) : resolve(tasks);
-      })
-    });
+    collection.find({}).toArray(function(err, tasks){
+      err ? reject(err) : resolve(tasks);
+    })
   })
 }
 
 const createTask = ({description, userId}) => {
   return new Promise((resolve, reject) => {
-    connect().then(() => {
-      collection.insertOne({
-        userId,
-        description,
-        isComplete: false
-      }).then(function(res) {
-        resolve(res.insertedId.toString())
-      }).catch(function(err) {
-        reject(err)
-      })
+    collection.insertOne({
+      userId,
+      description,
+      isComplete: false
+    }).then(function(res) {
+      resolve(res.insertedId.toString())
+    }).catch(function(err) {
+      reject(err)
     })
   })
 }
