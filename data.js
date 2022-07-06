@@ -9,6 +9,8 @@ const url = "mongodb+srv://selga:d063NMIdf7mbSmmZ@cluster0.mw0ub5m.mongodb.net/?
 const client = new MongoClient(url);
 // Database Name
 const dbName = "to-do-list";
+let db;
+let collection;
 await client.connect();
 console.log("Connected successfully to server");
 const db = client.db(dbName);
