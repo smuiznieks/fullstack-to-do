@@ -17,8 +17,8 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client){
 });
 
 const getAllTasks = () => {
+  const collection = db.collection("tasks");
   return new Promise((resolve, reject) => {
-    let collection = db.collection("tasks");
     collection.find({}).toArray(function(err, tasks){
       err ? reject(err) : resolve(tasks);
     })
@@ -26,8 +26,8 @@ const getAllTasks = () => {
 }
 
 const createTask = ({description, userId}) => {
+  const collection = db.collection("tasks");
   return new Promise((resolve, reject) => {
-    let collection = db.collection("tasks");
     collection.insertOne({
       userId,
       description,
