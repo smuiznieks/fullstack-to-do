@@ -14,14 +14,10 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 // const db = client.db(dbName);
 // const  collection = db.collection("tasks");
 const uri = "mongodb+srv://selga:d063NMIdf7mbSmmZ@cluster0.mw0ub5m.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {useUnifiedTopology: true});
-let db = null;
-let collection = null;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+let collection;
 client.connect(err => {
-  db = client.db("to-do-list")
-  collection = db.collection("tasks");
-  // perform actions on the collection object
-  // client.close();
+  collection = client.db("to-do-list").collection("tasks");
 });
 
 const getAllTasks = () => {
