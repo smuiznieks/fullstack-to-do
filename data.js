@@ -6,20 +6,15 @@ import { MongoClient } from "mongodb";
 // const url = "mongodb://localhost:27017";
 // const url = "mongodb://127.0.0.1:27017";
 const url = "mongodb+srv://selga:d063NMIdf7mbSmmZ@cluster0.mw0ub5m.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(url);
+let db = null;
 // Database Name
 const dbName = "to-do-list";
-let db;
-let collection;
 
-async function connect() {
-  // Use connect method to connect to the server
-  await client.connect();
+// UPDATED! THIS IS WORKING!!!
+MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client){
   console.log("Connected successfully to server");
   db = client.db(dbName);
-  collection = db.collection("tasks");
-  return "done.";
-}
+});
 
 const getAllTasks = () => {
   return new Promise((resolve, reject) => {
@@ -45,4 +40,4 @@ const createTask = ({description, userId}) => {
   })
 }
 
-export { connect, getAllTasks, createTask };
+export { getAllTasks, createTask };
