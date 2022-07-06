@@ -3,7 +3,7 @@ import { Low, JSONFile } from "lowdb";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import cors from "cors";
-import { connect, getAllTasks, createTask } from "./data.js";
+import { getAllTasks, createTask } from "./data.js";
 
 const app = express();
 app.use(express.static(path.join(path.resolve(), "build")));
@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 const port = process.env.PORT || 3001;
-connect();
+console.log(port);
 
 // Use JSON file for storage
 // const file = path.join(path.resolve(), "db.json");

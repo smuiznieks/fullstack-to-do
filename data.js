@@ -23,26 +23,28 @@ async function connect() {
 
 const getAllTasks = () => {
   return new Promise((resolve, reject) => {
-    let collection = db.collection("tasks");
-    collection.find({}).toArray(function(err, tasks){
-      err ? reject(err) : resolve(tasks);
-    })
+    connect().then(() => {
+      collection.find({}).toArray(function(err, tasks){
+        err ? reject(err) : resolve(tasks);
+      })
+    });
   })
 }
 
 const createTask = ({description, userId}) => {
   return new Promise((resolve, reject) => {
-    let collection = db.collection("tasks");
-    collection.insertOne({
-      userId,
-      description,
-      isComplete: false
-    }).then(function(res) {
-      resolve(res.insertedId.toString())
-    }).catch(function(err) {
-      reject(err)
+    connect().then(() => {
+      collection.insertOne({
+        userId,
+        description,
+        isComplete: false
+      }).then(function(res) {
+        resolve(res.insertedId.toString())
+      }).catch(function(err) {
+        reject(err)
+      })
     })
   })
 }
 
-export { connect, getAllTasks, createTask };
+export { getAllTasks, createTask };
