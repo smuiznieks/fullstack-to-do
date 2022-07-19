@@ -5,7 +5,8 @@ import { MongoClient } from "mongodb";
 // Connection URL
 // const url = "mongodb://localhost:27017";
 // const url = "mongodb://127.0.0.1:27017";
-const url = "mongodb+srv://selga:03p8Fo1RUMLjslib@cluster0.mw0ub5m.mongodb.net/?retryWrites=true&w=majority"
+const url =
+  "mongodb+srv://selga:bpiHJcQxQXqYMcUi@cluster0.mw0ub5m.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(url);
 // Database Name
 const dbName = "to-do-list";
