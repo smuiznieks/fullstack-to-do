@@ -18,6 +18,7 @@ async function main() {
   await client.connect();
   console.log("Connected successfully to server");
   db = client.db(dbName);
+  console.log(db);
   collection = db.collection("tasks");
 
   // const insertResult = await collection.insertMany([
