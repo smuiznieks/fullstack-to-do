@@ -6,7 +6,7 @@ import { MongoClient } from "mongodb";
 // const url = "mongodb://localhost:27017";
 // const url = "mongodb://127.0.0.1:27017";
 const url =
-  "mongodb+srv://selga:bpiHJcQxQXqYMcUi@cluster0.mw0ub5m.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://admin:eDqx0OtJAdX4fqAQ@cluster0.e5srgl7.mongodb.net/admin?authSource=admin&replicaSet=atlas-1vq3so-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true";
 const client = new MongoClient(url);
 // Database Name
 const dbName = "to-do-list";

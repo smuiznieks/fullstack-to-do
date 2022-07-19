@@ -6,7 +6,7 @@ import cors from "cors";
 import { getAllTasks, createTask } from "./data.js";
 
 const app = express();
-app.use(express.static(path.join(path.resolve(), "build")));
+app.use(express.static(path.join(path.resolve(), "selga")));
 app.use(cors());
 app.use(express.json());
 
